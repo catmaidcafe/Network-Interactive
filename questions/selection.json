@@ -1,0 +1,7 @@
+{
+  "type": "select",
+  "name": "value",
+  "message": "",
+  "choices": [],
+  "initial": 0
+}

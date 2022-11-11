@@ -1,0 +1,14 @@
+{
+  "type": "select",
+  "name": "value",
+  "message": "Welcome to the Cataract shell, the purrfect shell    \n    ,_     _,\n    |\\\\___//|\n    |=6   6=|\n    \\=._Y_.=/\n     )     (    ,\n    /       \\  ((\n    |       |   ))\n   /| |   | |\\_//\n   \\| |._.| |/-\\\n    '\"'   '\"'\n    ",
+  "choices": [
+    {
+      "title": "Set Network Settings",
+      "description": "Set Device Network Settings",
+      "value": "network-pre"
+    },
+    { "title": "Exit", "value": null }
+  ],
+  "initial": 0
+}

@@ -1,0 +1,25 @@
+[
+  {
+    "type": "text",
+    "name": "ip",
+    "message": "Enter the IP"
+  },
+  {
+    "type": "text",
+    "name": "mask",
+    "message": "Enter the Mask",
+    "initial": "255.255.255.0"
+  },
+  {
+    "type": "text",
+    "name": "gateway",
+    "message": "Enter the Gateway",
+    "initial": "10.0.2.2"
+  },
+  {
+    "type": "text",
+    "name": "dns",
+    "message": "Enter the DNS",
+    "initial": "8.8.8.8"
+  }
+]
