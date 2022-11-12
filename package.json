@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "extract-zip": "^2.0.1",
     "prompts": "^2.4.2"
   }
 }

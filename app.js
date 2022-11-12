@@ -2,6 +2,9 @@ const prompts = require("prompts");
 const { networkInterfaces } = require("os");
 const { exec, spawnSync } = require("child_process");
 const dns = require("dns");
+const fs = require("fs");
+const crypto = require("crypto");
+const extract = require("extract-zip");
 
 const network = networkInterfaces();
 let navStack = [];
@@ -56,11 +59,56 @@ async function promptRes(res, data) {
       Object.keys(results).forEach((interf) => {
         interQ.choices.push({ title: interf, value: interf });
       });
-      
+
       interQ.message = "Please select the adapter to update";
 
       const interfaces = await prompts(interQ);
       promptRes({ value: "network" }, interfaces);
+      break;
+    case "update-pre":
+      let fileList = fs.readdirSync("./file");
+      let hashArray = [];
+
+      fileList.map((file) => {
+        var data = fs.readFileSync(`./file/${file}`);
+        var pubkey = fs.readFileSync("./keys/public.pem", "utf8");
+        var signature = fs.readFileSync("./keys/update2");
+        var verifier = crypto.createVerify("RSA-SHA256");
+
+        verifier.update(data);
+        var success = verifier.verify(pubkey, signature, "hex");
+        hashArray.push(success);
+      });
+
+      let fileQ = selectionQ;
+
+      Object.keys(fileList).forEach((file, int) => {
+        fileQ.choices.push({
+          title: `${fileList[file]} - Hash ${
+            hashArray[int] ? "V" : "Unv"
+          }erified`,
+          value: fileList[file],
+        });
+      });
+
+      fileQ.message = "Please select the update to apply";
+
+      const interface = await prompts(fileQ);
+      promptRes({ value: "update" }, interface);
+      break;
+    case "update":
+      console.log(data);
+      await extract(`./file/${data.value}`, { dir: __dirname + `./extract` });
+
+      
+      var child_process = require("child_process");
+
+      child_process.exec(
+        __dirname + `.//extract/run.bat`,
+        function (error, stdout, stderr) {
+          console.log(stdout);
+        }
+      );
       break;
     case "exit":
       return null;

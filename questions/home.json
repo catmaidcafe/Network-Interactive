@@ -8,6 +8,11 @@
       "description": "Set Device Network Settings",
       "value": "network-pre"
     },
+    {
+      "title": "Update Filesystem",
+      "description": "Select update from the file directory",
+      "value": "update-pre"
+    },
     { "title": "Exit", "value": null }
   ],
   "initial": 0
